@@ -4,10 +4,27 @@ version = "0.1.0"
 authors = ["Nathaniel McCallum <npmccallum@redhat.com>"]
 edition = "2018"
 license = "Apache-2.0"
+homepage = "https://github.com/enarx/vdso"
+repository = "https://github.com/enarx/vdso"
+description = "Resolve Linux vDSO symbols"
+readme = "README.md"
+keywords = ["linux", "vdso"]
+categories = ["development-tools", "os::linux-apis"]
+exclude = [ ".gitignore", ".github/*" ]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[badges]
+# See https://doc.rust-lang.org/cargo/reference/manifest.html#the-badges-section
+github = { repository = "enarx/vdso", workflow = "test" }
+#github = { repository = "enarx/vdso", workflow = "lint" }
+maintenance = { status = "actively-developed" }
+is-it-maintained-issue-resolution = { repository = "enarx/vdso" }
+is-it-maintained-open-issues = { repository = "enarx/vdso" }
 
 [dev-dependencies]
 libc = "0.2.67"
 
 [dependencies]
-crt0stack = { path = "../crt0stack", features=["std"] }
+crt0stack = "0.1"
 goblin = "0.2.0"
