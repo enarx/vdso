@@ -3,6 +3,7 @@ name = "vdso"
 version = "0.2.2-alpha.1"
 authors = ["Nathaniel McCallum <npmccallum@redhat.com>"]
 edition = "2021"
+rust-version = "1.56"
 license = "Apache-2.0"
 homepage = "https://github.com/enarx/vdso"
 repository = "https://github.com/enarx/vdso"
