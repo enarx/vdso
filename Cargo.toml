@@ -23,9 +23,6 @@ maintenance = { status = "actively-developed" }
 is-it-maintained-issue-resolution = { repository = "enarx/vdso" }
 is-it-maintained-open-issues = { repository = "enarx/vdso" }
 
-[dev-dependencies]
-libc = "0.2.67"
-
 [dependencies]
-crt0stack = "0.1"
 goblin = "0.6.0"
+libc = "0.2.67"
