@@ -11,7 +11,7 @@ description = "Resolve Linux vDSO symbols"
 readme = "README.md"
 keywords = ["linux", "vdso"]
 categories = ["development-tools", "os::linux-apis"]
-exclude = [ ".gitignore", ".github/*" ]
+exclude = [".gitignore", ".github/*"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -23,9 +23,6 @@ maintenance = { status = "actively-developed" }
 is-it-maintained-issue-resolution = { repository = "enarx/vdso" }
 is-it-maintained-open-issues = { repository = "enarx/vdso" }
 
-[dev-dependencies]
-libc = "0.2.67"
-
 [dependencies]
-crt0stack = "0.1"
 goblin = "0.8.0"
+libc = "0.2.153"
