@@ -3,7 +3,7 @@ name = "vdso"
 version = "0.2.2"
 authors = ["Nathaniel McCallum <npmccallum@redhat.com>"]
 edition = "2021"
-rust-version = "1.56"
+rust-version = "1.65"
 license = "Apache-2.0"
 homepage = "https://github.com/enarx/vdso"
 repository = "https://github.com/enarx/vdso"
@@ -28,4 +28,4 @@ libc = "0.2.67"
 
 [dependencies]
 crt0stack = "0.1"
-goblin = "0.6.0"
+goblin = "0.8.0"
