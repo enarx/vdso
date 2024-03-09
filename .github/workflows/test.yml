@@ -6,14 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: ${{ matrix.toolchain }}
-          override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: ${{ matrix.profile.flag }}
+      - name: Install Rust
+        run: rustup toolchain install ${{ matrix.toolchain }}
+      - name: cargo test ${{ matrix.toolchain }}
+        run: cargo +${{ matrix.toolchain }} test ${{ matrix.profile.flag }}
     strategy:
       fail-fast: false
       matrix:
@@ -21,7 +17,7 @@ jobs:
           - nightly
           - beta
           - stable
-          - 1.56.0
+          - 1.65.0
         profile:
           - name: debug
           - name: release
