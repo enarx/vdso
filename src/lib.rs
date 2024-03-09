@@ -5,7 +5,6 @@
 #![deny(missing_docs)]
 #![deny(clippy::all)]
 
-use crt0stack::{Entry, Reader};
 use std::ffi::CStr;
 use std::os::raw::c_char;
 use std::slice::from_raw_parts;
@@ -20,6 +19,7 @@ mod elf {
     pub use goblin::elf64::sym::Sym;
 
     pub const CLASS: u8 = ELFCLASS64;
+
     pub type Word = u64;
 }
 
@@ -33,6 +33,7 @@ mod elf {
     pub use goblin::elf32::sym::Sym;
 
     pub const CLASS: u8 = ELFCLASS32;
+
     pub type Word = u32;
 }
 
@@ -114,14 +115,13 @@ pub struct Vdso<'a>(&'a Header);
 impl Vdso<'static> {
     /// Locates the vDSO by parsing the auxiliary vectors
     pub fn locate() -> Option<Self> {
-        for aux in Reader::from_environ().done() {
-            if let Entry::SysInfoEHdr(addr) = aux {
-                let hdr = unsafe { Header::from_ptr(&*(addr as *const _))? };
-                return Some(Self(hdr));
-            }
+        let val = unsafe { libc::getauxval(libc::AT_SYSINFO_EHDR) };
+        if val == 0 {
+            return None;
         }
 
-        None
+        let hdr = unsafe { Header::from_ptr(&*(val as *const _))? };
+        Some(Self(hdr))
     }
 }
 
