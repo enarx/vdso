@@ -11,6 +11,7 @@ use std::os::raw::c_char;
 use std::slice::from_raw_parts;
 
 #[cfg(target_pointer_width = "64")]
+#[allow(unused_imports)]
 mod elf {
     pub use goblin::elf64::dynamic::*;
     pub use goblin::elf64::header::*;
@@ -23,6 +24,7 @@ mod elf {
 }
 
 #[cfg(target_pointer_width = "32")]
+#[allow(unused_imports)]
 mod elf {
     pub use goblin::elf32::dynamic::*;
     pub use goblin::elf32::header::*;
@@ -82,7 +84,7 @@ impl Header {
         let symstrtab: &[c_char] = self.section(elf::SHT_STRTAB)?;
         let symtab: &[elf::Sym] = self.section(elf::SHT_DYNSYM)?;
 
-        // Yes, we could spead up the lookup by checking against the hash
+        // Yes, we could speed up the lookup by checking against the hash
         // table. But the reality is that there is less than a dozen symbols
         // in the vDSO, so the gains are trivial.
 
@@ -90,7 +92,7 @@ impl Header {
             let cstr = CStr::from_ptr(&symstrtab[sym.st_name as usize]);
             if let Ok(s) = cstr.to_str() {
                 if s == name {
-                    let addr = self.ptr(sym.st_value) as *const Symbol;
+                    let addr = self.ptr(sym.st_value);
                     return Some(&*addr);
                 }
             }
