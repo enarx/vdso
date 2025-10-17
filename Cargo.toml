@@ -28,4 +28,4 @@ libc = "0.2.67"
 
 [dependencies]
 crt0stack = "0.1"
-goblin = "0.9.0"
+goblin = "0.10.3"
