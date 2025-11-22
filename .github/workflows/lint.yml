@@ -1,4 +1,4 @@
-on: [pull_request]
+on: [push, pull_request]
 
 name: lint
 
@@ -32,3 +32,11 @@ jobs:
       - run: cargo +stable install cargo-readme
       - run: cargo install cargo-readme
       - run: cargo readme > README.md && git diff --exit-code
+
+  check-spdx-headers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: enarx/spdx@b5bfdd4410071bf058c8333d0e70020001524b6b # master
+        with:
+          licenses: Apache-2.0
